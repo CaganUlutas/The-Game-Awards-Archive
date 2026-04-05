@@ -1,0 +1,276 @@
+/* =========================================
+   home.css - HERO, YEAR SELECTOR, GAMES GRID
+   ========================================= */
+
+/* =========================================
+   1. HERO SECTION (Main Banner)
+   ========================================= */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 32px 64px 32px;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, #0b0f19, rgba(11, 15, 25, 0.6), transparent);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 48rem;
+}
+
+.badge-goty {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: black;
+    background-color: #facc15;
+    border-radius: 4px;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+.hero-desc {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    margin-bottom: 24px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-primary {
+    padding: 12px 32px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    border-radius: 9999px;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #e5e7eb;
+    transform: scale(1.05);
+}
+
+.score-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-weight: bold;
+    color: #4ade80;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #4ade80;
+    border-radius: 50%;
+}
+
+/* =========================================
+   2. YEAR SELECTOR (6x2 Centered Year Buttons)
+   ========================================= */
+.year-selector-container {
+    background-color: #0b0f19;
+    padding: 24px 32px;
+    border-bottom: 1px solid #1f2937;
+    /* Keeps the menu sticky at the top while scrolling */
+    position: sticky;
+    top: 70px; 
+    z-index: 40;
+}
+
+.year-selector {
+    display: flex;
+    flex-wrap: wrap; /* Wraps buttons to the next line if they don't fit */
+    justify-content: center; /* Centers the buttons */
+    gap: 16px;
+    max-width: 800px; /* Forces wrapping after approx. 6 buttons */
+    margin: 0 auto;
+}
+
+.year-btn {
+    padding: 10px 24px;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: #1f2937;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Prevents text from wrapping inside the button */
+    border: 1px solid transparent;
+}
+
+.year-btn:hover {
+    color: white;
+    background-color: #374151;
+}
+
+.year-btn.active {
+    color: black;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    transform: scale(1.05);
+}
+
+/* =========================================
+   3. GAMES GRID (Centered Gallery Layout)
+   ========================================= */
+.content-wrapper {
+    padding: 0 32px;
+    margin-top: 48px;
+}
+
+.year-title {
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1f2937;
+    background: linear-gradient(to right, #f3f4f6, #6b7280);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.category-block {
+    margin-bottom: 40px;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #e5e7eb;
+    margin-bottom: 24px;
+}
+
+.games-grid {
+    display: flex;
+    flex-wrap: wrap; /* Aligns cards side by side, wraps to next line if screen narrows */
+    justify-content: center; /* Centers all card blocks in the middle of the screen */
+    gap: 24px;
+    padding-bottom: 40px;
+}
+
+/* =========================================
+   4. GAME CARDS (Game Card Design)
+   ========================================= */
+.game-card {
+    position: relative;
+    width: 256px; /* Fixed width for cards */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.card-inner {
+    position: relative;
+    height: 100%;
+    background-color: #1a202c;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.card-border {
+    border: 1px solid #374151;
+}
+
+.card-glow-winner {
+    position: absolute;
+    top: -2px; right: -2px; bottom: -2px; left: -2px;
+    background: linear-gradient(to right, #facc15, #ca8a04);
+    border-radius: 12px;
+    filter: blur(8px);
+    opacity: 0.75;
+    transition: opacity 0.3s;
+}
+
+.game-card:hover .card-glow-winner {
+    opacity: 1;
+}
+
+.card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.badge-winner {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #facc15;
+    margin-bottom: 4px;
+}
+
+.badge-nominee {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #9ca3af;
+    margin-bottom: 4px;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #f3f4f6;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+.card-genre {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+}
+
+.card-score {
+    background-color: #14532d;
+    color: #4ade80;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem;
+}

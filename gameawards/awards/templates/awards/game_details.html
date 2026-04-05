@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game.name }} - TGA Archive</title>
+    <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'awards/details.css' %}?v=4">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">TGA ARCHIVE</a>
+        <div class="nav-links">
+            <a href="/">← Back To Home </a>
+        </div>
+    </nav>
+
+    <section class="detail-hero" style="background-image: url('{% if game.background_image %}{{ game.background_image }}{% else %}https://via.placeholder.com/1920x1080{% endif %}');">
+        <div class="detail-overlay"></div>
+        <div class="detail-header-content">
+            <h1 class="detail-title">{{ game.name }}</h1>
+            <div class="detail-meta">
+                <span class="meta-item">📅 Released: {{ game.released|date:"Y"|default:"Unknown" }}</span>
+                <span class="meta-item">🎮 {{ game.genres|default:"Game" }}</span>
+                <span class="meta-score">Metacritic: {% if game.metacritic_score %}{{ game.metacritic_score }}{% else %}TBD{% endif %}</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="detail-container">
+        
+        <aside class="detail-sidebar">
+            <div class="stat-card">
+    <h3>Statistics</h3>
+    <div class="stat-grid">
+        <div class="stat-box">
+            <span class="stat-number">{{ total_nominations }}</span>
+            <span class="stat-label">Nomınatıons</span>
+        </div>
+        <div class="stat-box winner-box">
+            <span class="stat-number text-yellow">{{ total_wins }}</span>
+            <span class="stat-label">Wıns</span>
+        </div>
+    </div>
+    
+    <!-- HLTB Statistics -->
+    <div class="hltb-section" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #374151;">
+        <h4 style="color: #e5e7eb; font-size: 1rem; margin-bottom: 12px;">⏱️ How Long to Beat</h4>
+        <div class="hltb-times">
+            <div class="hltb-item">
+                <span class="hltb-label">Main Story</span>
+                <span class="hltb-value">{% if hltb_main_hours is not None %}{{ hltb_main_hours }} hours{% else %}Unknown{% endif %}</span>
+            </div>
+            <div class="hltb-item">
+                <span class="hltb-label">Main + Extras</span>
+                <span class="hltb-value">{% if hltb_extra_hours is not None %}{{ hltb_extra_hours }} hours{% else %}Unknown{% endif %}</span>
+            </div>
+            <div class="hltb-item">
+                <span class="hltb-label">Completionist</span>
+                <span class="hltb-value">{% if hltb_completionist_hours is not None %}{{ hltb_completionist_hours }} hours{% else %}Unknown{% endif %}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="action-card">
+                <h3 style="margin-bottom: 16px; color: #e5e7eb; font-size: 1.1rem; border-bottom: 1px solid #374151; padding-bottom: 8px;">Store Links</h3>
+                <div class="store-links">
+                    
+                    {% if game.steam_url %}
+                        <a href="{{ game.steam_url }}" target="_blank" class="btn-store btn-steam">
+                            <img src="{% static 'awards/icons/steam.png' %}" alt="Steam Logo" class="store-icon">
+                            Steam
+                        </a>
+                    {% endif %}
+
+                    {% if game.playstation_url %}
+                        <a href="{{ game.playstation_url }}" target="_blank" class="btn-store btn-ps">
+                            <img src="{% static 'awards/icons/ps.jpg' %}" alt="PlayStation Logo" class="store-icon">
+                            PlayStation Store
+                        </a>
+                    {% endif %}
+
+                    {% if game.xbox_url %}
+                        <a href="{{ game.xbox_url }}" target="_blank" class="btn-store btn-xbox">
+                            <img src="{% static 'awards/icons/xbox.jpg' %}" alt="Xbox Logo" class="store-icon">
+                            Xbox Store
+                        </a>
+                    {% endif %}
+
+                    {% if game.nintendo_url %}
+                        <a href="{{ game.nintendo_url }}" target="_blank" class="btn-store btn-nintendo">
+                            <img src="{% static 'awards/icons/nintendo.jpg' %}" alt="Nintendo Logo" class="store-icon">
+                            Nintendo eShop
+                        </a>
+                    {% endif %}
+
+                    {% if not game.steam_url and not game.playstation_url and not game.xbox_url and not game.nintendo_url %}
+                        <button class="btn-console" disabled>Store link not available</button>
+                    {% endif %}
+                </div>
+            </div>
+        </aside>
+
+        <section class="detail-content">
+            
+            {% if game.description %}
+            <div class="game-description-block" style="margin-bottom: 40px;">
+                <h2 class="section-title">About Game</h2>
+                <p style="color: #d1d5db; font-size: 1.1rem; line-height: 1.8;">
+                    {{ game.description|linebreaks }}
+                </p>
+            </div>
+            {% endif %}
+            
+            {% if game.trailer_url %}
+            <div class="video-section">
+                <h2 class="section-title">Official Trailer</h2>
+                <div class="video-container">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="{{ game.trailer_url }}?autoplay=1&mute=1" 
+                        title="{{ game.name }} Official Trailer" 
+                        frameborder="0"                   
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            {% endif %}
+
+            <h2 class="section-title">Nominations and Award History</h2>
+            
+            <div class="nomination-list">
+                {% for nom in nominations %}
+                <div class="nomination-item {% if nom.is_winner %}winner-item{% endif %}">
+                    <div class="nom-year">{{ nom.year.year }}</div>
+                    <div class="nom-category">{{ nom.category.name }}</div>
+                    <div class="nom-result">
+                        {% if nom.is_winner %}
+                            <span class="badge-goty">🏆 WINNER</span>
+                        {% else %}
+                            <span class="badge-nominee">Nominee</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p>No nominations found for this game.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

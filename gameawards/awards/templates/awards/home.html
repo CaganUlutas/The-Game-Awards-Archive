@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Game Awards Archive</title>
+    <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'awards/home.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">TGA ARCHIVE</div>
+        <div class="nav-links">
+            <a href="/">Home Page</a>
+        </div>
+    </nav>
+
+    <main>
+        {% with current_year=selected_year|default:years.first %}
+        
+        {% for nom in current_year.nomination_set.all %}
+            {% if nom.category.name == "Game of the Year" and nom.is_winner %}
+            <section class="hero-section" style="background-image: url('{% if nom.game.background_image %}{{ nom.game.background_image }}{% else %}https://via.placeholder.com/1920x1080{% endif %}');">
+                <div class="hero-overlay"></div>
+                
+                <div class="hero-content">
+                    <span class="badge-goty">🏆 GAME OF THE YEAR {{ current_year.year }}</span>
+                    <h1 class="hero-title">{{ nom.game.name }}</h1>
+                    <p class="hero-desc">{{ nom.game.genres }}</p>
+                    
+                    <div class="hero-actions">
+                        <a href="{% url 'awards:game_detail' slug=nom.game.slug %}" class="btn-primary">See Details</a>
+                        <div class="score-circle">
+                            {% if nom.game.metacritic_score %}{{ nom.game.metacritic_score }}{% else %}TBD{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        {% endfor %}
+
+        <div class="year-selector-container">
+            <div class="year-selector">
+                {% for y in all_years|default:years %}
+                    <a href="{% url 'awards:year_detail' year=y.year %}" class="year-btn {% if y.year == current_year.year %}active{% endif %}">
+                        {{ y.year }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <h1 class="year-title" style="text-align: center;">{{ current_year.year }} Awards</h1>
+
+            {% regroup current_year.nomination_set.all|dictsort:"category.name" by category as category_list %}
+            
+            {% for category in category_list %}
+                {% if category.grouper.name == "Game of the Year" %}
+                <div class="category-block">
+                    <h2 class="category-title" style="text-align: center; border-left: none; padding-left: 0;">{{ category.grouper.name }}</h2>
+                    <div class="games-grid">
+                        {% for nomination in category.list %}
+                        <a href="{% url 'awards:game_detail' slug=nomination.game.slug %}" class="game-card">
+                            {% if nomination.is_winner %}
+                                <div class="card-glow-winner"></div>
+                            {% endif %}
+                            <div class="card-inner {% if not nomination.is_winner %}card-border{% endif %}">
+                                <img src="{% if nomination.game.background_image %}{{ nomination.game.background_image }}{% else %}https://via.placeholder.com/400x300{% endif %}" alt="{{ nomination.game.name }}" class="card-img">
+                                <div class="card-body">
+                                    {% if nomination.is_winner %}
+                                        <span class="badge-winner">🏆 WINNER</span>
+                                    {% else %}
+                                        <span class="badge-nominee">Nominee</span>
+                                    {% endif %}
+                                    <h3 class="card-title">{{ nomination.game.name }}</h3>
+                                    <div class="card-footer">
+                                        <span class="card-genre">{{ nomination.game.genres|default:"Oyun"|slice:":15" }}</span>
+                                        <span class="card-score">{% if nomination.game.metacritic_score %}{{ nomination.game.metacritic_score }}{% else %}-{% endif %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for category in category_list %}
+                {% if category.grouper.name != "Game of the Year" %}
+                <div class="category-block">
+                    <h2 class="category-title" style="text-align: center; border-left: none; padding-left: 0;">{{ category.grouper.name }}</h2>
+                    <div class="games-grid">
+                        {% for nomination in category.list %}
+                        <a href="{% url 'awards:game_detail' slug=nomination.game.slug %}" class="game-card">
+                            {% if nomination.is_winner %}
+                                <div class="card-glow-winner"></div>
+                            {% endif %}
+                            <div class="card-inner {% if not nomination.is_winner %}card-border{% endif %}">
+                                <img src="{% if nomination.game.background_image %}{{ nomination.game.background_image }}{% else %}https://via.placeholder.com/400x300{% endif %}" alt="{{ nomination.game.name }}" class="card-img">
+                                <div class="card-body">
+                                    {% if nomination.is_winner %}
+                                        <span class="badge-winner">🏆 WINNER</span>
+                                    {% else %}
+                                        <span class="badge-nominee">Nominee</span>
+                                    {% endif %}
+                                    <h3 class="card-title">{{ nomination.game.name }}</h3>
+                                    <div class="card-footer">
+                                        <span class="card-genre">{{ nomination.game.genres|default:"Oyun"|slice:":15" }}</span>
+                                        <span class="card-score">{% if nomination.game.metacritic_score %}{{ nomination.game.metacritic_score }}{% else %}-{% endif %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        {% endwith %}
+    </main>
+
+</body>
+</html>
