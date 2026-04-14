@@ -5,35 +5,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results - The Game Awards Archive</title>
+    <title>Top Games - The Game Awards Archive</title>
     <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=5">
     <link rel="stylesheet" href="{% static 'awards/home.css' %}">
+    <link rel="stylesheet" href="{% static 'awards/top_games.css' %}">
 </head>
 
 <body>
 
     <nav class="navbar">
-        <a href="/" class="logo">TGA ARCHIVE</a>
+        <a href="/" class="logo" style="text-decoration: none; color: inherit;">TGA ARCHIVE</a>
         <div class="nav-links">
             <form action="{% url 'awards:search' %}" method="get" class="search-form">
-                <input type="text" name="q" value="{{ query }}" placeholder="Search games..." class="search-input"
-                    required>
+                <input type="text" name="q" placeholder="Search games..." class="search-input" required>
                 <button type="submit" class="search-btn">🔍</button>
             </form>
             <a href="/">Home Page</a>
-            <a href="{% url 'awards:top_games' %}">Top Games</a>
-            <a href="{% url 'awards:hall_of_fame' %}" class="nav-highlight">Hall of Fame</a>
+            <a href="{% url 'awards:top_games' %}" class="nav-highlight">Top Games</a>
+            <a href="{% url 'awards:hall_of_fame' %}">Hall of Fame</a>
         </div>
     </nav>
 
     <main>
         <div class="content-wrapper" style="margin-top: 40px;">
-            <h1 class="year-title" style="text-align: center;">Search Results for "{{ query }}"</h1>
+            <h1 class="year-title" style="text-align: center;">Top Games by Metacritic Score</h1>
 
-            {% if results %}
+            {% if page_obj %}
             <div class="category-block">
                 <div class="games-grid">
-                    {% for game in results %}
+                    {% for game in page_obj %}
                     <a href="{% url 'awards:game_detail' slug=game.slug %}" class="game-card">
                         <div class="card-inner card-border">
                             <img src="{% if game.background_image %}{{ game.background_image }}{% else %}https://via.placeholder.com/400x300{% endif %}"
@@ -55,10 +55,28 @@
                     </a>
                     {% endfor %}
                 </div>
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; First Page</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">Last Page &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
             {% else %}
             <div style="text-align: center; color: #9ca3af; margin-top: 40px;">
-                <p>No games found matching your search query.</p>
+                <p>No games found.</p>
             </div>
             {% endif %}
         </div>

@@ -2,6 +2,7 @@ import re
 from django.shortcuts import render, get_object_or_404
 from .models import AwardYear, Category, Nomination, Game
 from django.db.models import Q
+from django.core.paginator import Paginator
  
  
 def home(request):
@@ -103,3 +104,11 @@ def hall_of_fame(request):
         'winners': goty_winners
     }
     return render(request, 'awards/hall_of_fame.html', context)
+
+def top_games(request):
+    games_list = Game.objects.exclude(metacritic_score__isnull=True).order_by('-metacritic_score', 'name')
+    paginator = Paginator(games_list, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'awards/top_games.html', {'page_obj': page_obj})
