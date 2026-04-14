@@ -1,0 +1,173 @@
+/* =========================================
+   base.css - GENERAL RESET & NAVBAR
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #0b0f19;
+    color: white;
+    padding-bottom: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   NAVIGATION BAR (NAVBAR)
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    background: linear-gradient(to right, #60a5fa, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #d1d5db;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* =========================================
+   HALL OF FAME BUTTON (PREMIUM LOOK)
+   ========================================= */
+.nav-highlight {
+    color: #facc15 !important;
+    /* Gold text */
+    border: 1px solid #facc15;
+    /* Gold border */
+    padding: 8px 18px;
+    border-radius: 99px;
+    /* Pill shape */
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.1);
+}
+
+.nav-highlight:hover {
+    background-color: #facc15;
+    /* Gold background */
+    color: #0b0f19 !important;
+    /* Dark text */
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+    transform: translateY(-2px);
+    /* Slight lift effect */
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid #374151;
+    padding: 32px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-text {
+    color: #d1d5db;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer-text a {
+    color: #60a5fa;
+    text-decoration: none;
+    border-bottom: 1px solid #60a5fa;
+    transition: color 0.2s;
+}
+
+.footer-text a:hover {
+    color: #a855f7;
+    border-bottom-color: #a855f7;
+}
+
+/* =========================================
+   SEARCH BAR
+   ========================================= */
+.search-form {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    padding: 4px 12px;
+    margin: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.search-form:focus-within {
+    border-color: #60a5fa;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    width: 200px;
+}
+
+.search-input::placeholder {
+    color: #9ca3af;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.search-btn:hover {
+    opacity: 1;
+}

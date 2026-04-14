@@ -1,0 +1,417 @@
+/* =========================================
+   GAME DETAIL PAGE STYLES
+   ========================================= */
+.detail-hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: top center;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid #1f2937;
+}
+
+.detail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, #0b0f19 10%, rgba(11, 15, 25, 0.8) 50%, rgba(11, 15, 25, 0.3));
+}
+
+.detail-header-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 5% 40px 5%;
+    width: 100%;
+}
+
+.detail-title {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+.detail-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.meta-item {
+    font-size: 1rem;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+}
+
+.meta-score {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4ade80;
+    background: rgba(20, 83, 45, 0.8);
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid #4ade80;
+}
+
+/* Detail Page Grid Layout */
+.detail-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .detail-container {
+        grid-template-columns: 300px 1fr;
+    }
+}
+
+/* Sidebar Layout (Left Column) */
+.detail-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card,
+.action-card {
+    background-color: #1a202c;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.stat-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    color: #e5e7eb;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 12px;
+}
+
+/* Main Content Layout (Right Column) */
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0b0f19;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+}
+
+.winner-box {
+    border-color: #ca8a04;
+    background: linear-gradient(to bottom, #0b0f19, rgba(202, 138, 4, 0.1));
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.text-yellow {
+    color: #facc15;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================
+   STORE & EXTERNAL LINK BUTTONS
+   ========================================= */
+.store-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-store {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.store-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: inline-block;
+}
+
+/* Steam Button */
+.btn-steam {
+    background: linear-gradient(to right, #171a21, #2a475e);
+    border: 1px solid #66c0f4;
+}
+
+.btn-steam:hover {
+    background: linear-gradient(to right, #2a475e, #66c0f4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 192, 244, 0.4);
+}
+
+/* PlayStation Button */
+.btn-ps {
+    background: linear-gradient(to right, #003791, #00439C);
+    border: 1px solid #0070d1;
+}
+
+.btn-ps:hover {
+    background: linear-gradient(to right, #00439C, #0070d1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 112, 209, 0.4);
+}
+
+/* Xbox Button */
+.btn-xbox {
+    background: linear-gradient(to right, #107C10, #189e18);
+    border: 1px solid #52c152;
+}
+
+.btn-xbox:hover {
+    background: linear-gradient(to right, #189e18, #52c152);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 124, 16, 0.4);
+}
+
+/* Nintendo Button */
+.btn-nintendo {
+    background: linear-gradient(to right, #E60012, #ff1a2b);
+    border: 1px solid #ff4d5a;
+}
+
+.btn-nintendo:hover {
+    background: linear-gradient(to right, #ff1a2b, #ff4d5a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(230, 0, 18, 0.4);
+}
+
+/* Disabled Console Button */
+.btn-console {
+    width: 100%;
+    background-color: #1f2937;
+    color: #6b7280;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    cursor: not-allowed;
+    border: 1px dashed #374151;
+}
+
+/* =========================================
+   HOW LONG TO BEAT SECTION
+   ========================================= */
+.hltb-section {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid #374151;
+}
+
+
+
+.hltb-section h4 {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    color: #e5e7eb;
+}
+
+.hltb-times {
+    display: grid;
+    gap: 10px;
+}
+
+.hltb-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #272d38;
+    border-radius: 10px;
+}
+
+.hltb-label {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+.hltb-value {
+    font-size: 0.95rem;
+    color: #f8fafc;
+    font-weight: 600;
+}
+
+/* =========================================
+   RIGHT COLUMN (MEDIA & NOMINATIONS)
+   ========================================= */
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #f3f4f6;
+}
+
+/* Game Description */
+.game-description-block {
+    margin-bottom: 40px;
+}
+
+.game-description-block p {
+    color: #d1d5db;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Video & Media Area */
+.video-section {
+    margin-bottom: 48px;
+}
+
+/* 16:9 Responsive Iframe Container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #374151;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    background-color: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Watch Trailer Button */
+.watch-link-container {
+    padding: 16px 0;
+}
+
+.btn-watch {
+    display: inline-block;
+    background-color: #ef4444;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.2s, background-color 0.2s;
+    border: 1px solid #f87171;
+}
+
+.btn-watch:hover {
+    background-color: #dc2626;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Nomination History List */
+.nomination-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.nomination-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    background-color: #1a202c;
+    padding: 20px 24px;
+    border-radius: 12px;
+    border: 1px solid #374151;
+    transition: transform 0.2s;
+}
+
+.nomination-item:hover {
+    transform: translateX(8px);
+    border-color: #4b5563;
+}
+
+.winner-item {
+    border-left: 4px solid #facc15;
+    background: linear-gradient(to right, rgba(250, 204, 21, 0.05), #1a202c);
+}
+
+.nom-year {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #6b7280;
+}
+
+.winner-item .nom-year {
+    color: #facc15;
+}
+
+.nom-category {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #e5e7eb;
+}
+
+.nom-result {
+    text-align: right;
+}
+
+/* Nomination Badges */
+.badge-goty {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: black;
+    background-color: #facc15;
+    border-radius: 4px;
+}
+
+.badge-nominee {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #9ca3af;
+    margin-bottom: 4px;
+}

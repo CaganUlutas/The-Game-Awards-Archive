@@ -1,0 +1,168 @@
+/* =========================================
+   HALL OF FAME TIMELINE STYLES
+   ========================================= */
+
+.hof-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 32px;
+}
+
+.hof-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.hof-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #facc15; /* Gold Color */
+    text-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hof-subtitle {
+    font-size: 1.25rem;
+    color: #9ca3af;
+}
+
+/* Timeline Layout */
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* The Vertical Golden Line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, #facc15, transparent);
+    border-radius: 4px;
+    opacity: 0.5;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* The Year Bubble */
+.timeline-year {
+    background-color: #facc15;
+    color: #000;
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding: 12px 24px;
+    border-radius: 99px;
+    z-index: 10;
+    margin-bottom: 24px;
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+    border: 4px solid #0b0f19; /* Matches background to create a gap effect */
+}
+
+/* Custom Game Card for Timeline */
+.timeline-card {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.timeline-card:hover {
+    transform: scale(1.03) translateY(-5px);
+    z-index: 20;
+}
+
+.card-inner {
+    position: relative;
+    background-color: #1a202c;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    border: 1px solid #374151;
+}
+
+.card-glow-winner {
+    position: absolute;
+    top: -2px; right: -2px; bottom: -2px; left: -2px;
+    background: linear-gradient(45deg, #facc15, #ca8a04, transparent);
+    border-radius: 16px;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.timeline-card:hover .card-glow-winner {
+    opacity: 0.8;
+}
+
+.hof-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid #374151;
+}
+
+.hof-info {
+    padding: 24px;
+    text-align: center;
+}
+
+.badge-goty {
+    display: inline-block;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #000;
+    background-color: #facc15;
+    border-radius: 99px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.hof-game-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f3f4f6;
+    margin-bottom: 8px;
+}
+
+.hof-developer {
+    font-size: 1rem;
+    color: #9ca3af;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        align-items: flex-start;
+        padding-left: 60px;
+    }
+    
+    .timeline-year {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 8px 16px;
+        font-size: 1.2rem;
+        border-width: 2px;
+    }
+}

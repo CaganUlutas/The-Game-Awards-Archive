@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Fame - The Game Awards Archive</title>
+    <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'awards/hall_of_fame.css' %}?v=4">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">TGA ARCHIVE</div>
+        <div class="nav-links">
+            <form action="{% url 'awards:search' %}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Search games..." class="search-input" required>
+                <button type="submit" class="search-btn">🔍</button>
+            </form>
+            <a href="/">Home Page</a>
+            <a href="{% url 'awards:hall_of_fame' %}" class="active">Hall of Fame</a>
+        </div>
+    </nav>
+
+    <main class="hof-container">
+        <div class="hof-header">
+            <h1 class="hof-title">Hall of Fame</h1>
+            <p class="hof-subtitle">The ultimate legacy of "Game of the Year" winners.</p>
+        </div>
+
+        <div class="timeline">
+            {% for nomination in winners %}
+            <div class="timeline-item">
+
+                <!-- The Year Marker in the center -->
+                <div class="timeline-year">
+                    <span>{{ nomination.year.year }}</span>
+                </div>
+
+                <!-- The Game Card -->
+                <a href="{% url 'awards:game_detail' slug=nomination.game.slug %}" class="timeline-card">
+                    <div class="card-glow-winner"></div>
+                    <div class="card-inner">
+                        <img src="{% if nomination.game.background_image %}{{ nomination.game.background_image }}{% else %}https://via.placeholder.com/600x400{% endif %}"
+                            alt="{{ nomination.game.name }}" class="hof-img">
+                        <div class="hof-info">
+                            <span class="badge-goty">🏆 GAME OF THE YEAR</span>
+                            <h2 class="hof-game-title">{{ nomination.game.name }}</h2>
+                            {% if nomination.game.developers %}
+                            <p class="hof-developer">🛠️ {{ nomination.game.developers }}</p>
+                            {% else %}
+                            <p class="hof-developer">Unknown Developer</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+</body>
+
+</html>

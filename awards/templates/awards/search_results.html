@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - The Game Awards Archive</title>
+    <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=5">
+    <link rel="stylesheet" href="{% static 'awards/home.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">TGA ARCHIVE</a>
+        <div class="nav-links">
+            <form action="{% url 'awards:search' %}" method="get" class="search-form">
+                <input type="text" name="q" value="{{ query }}" placeholder="Search games..." class="search-input"
+                    required>
+                <button type="submit" class="search-btn">🔍</button>
+            </form>
+            <a href="/">Home Page</a>
+            <a href="{% url 'awards:hall_of_fame' %}" class="nav-highlight">Hall of Fame</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="content-wrapper" style="margin-top: 40px;">
+            <h1 class="year-title" style="text-align: center;">Search Results for "{{ query }}"</h1>
+
+            {% if results %}
+            <div class="category-block">
+                <div class="games-grid">
+                    {% for game in results %}
+                    <a href="{% url 'awards:game_detail' slug=game.slug %}" class="game-card">
+                        <div class="card-inner card-border">
+                            <img src="{% if game.background_image %}{{ game.background_image }}{% else %}https://via.placeholder.com/400x300{% endif %}"
+                                alt="{{ game.name }}" class="card-img">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ game.name }}</h3>
+                                <div class="card-footer">
+                                    <span class="card-genre">{{ game.genres|default:"Game"|slice:":15" }}</span>
+                                    <span class="card-score">
+                                        {% if game.metacritic_score %}
+                                            {{ game.metacritic_score }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div style="text-align: center; color: #9ca3af; margin-top: 40px;">
+                <p>No games found matching your search query.</p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+</body>
+
+</html>
