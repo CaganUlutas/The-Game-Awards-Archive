@@ -1,6 +1,6 @@
 # 🏆 The Game Awards Archive
 
-The Game Awards Archive is a Django-based web application that serves as a historic database for all the games nominated and awarded at The Game Awards over the years. This application provides a comprehensive look at the best video games, featuring extensive details, trailers, and developer information.
+The Game Awards Archive is a Django-based web application that serves as a historic database for all the games nominated and awarded at The Game Awards between 2014-2025. This application provides a comprehensive look at the best video games, featuring extensive details, trailers, and developer information.
 
 ## ✨ Features
 
