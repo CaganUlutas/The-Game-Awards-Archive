@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results - The Game Awards Archive</title>
+    <title>Search Results - TGA Archive</title>
+    <link rel="icon" type="image/png" href="{% static 'awards/icons/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=5">
     <link rel="stylesheet" href="{% static 'awards/home.css' %}">
 </head>
@@ -13,7 +14,10 @@
 <body>
 
     <nav class="navbar">
-        <a href="/" class="logo">TGA ARCHIVE</a>
+        <a href="/" class="logo">
+            <img src="{% static 'awards/icons/favicon.png' %}" alt="TGA Logo" class="nav-icon">
+            <span class="logo-text">TGA ARCHIVE</span>
+        </a>
         <div class="nav-links">
             <form action="{% url 'awards:search' %}" method="get" class="search-form">
                 <input type="text" name="q" value="{{ query }}" placeholder="Search games..." class="search-input"

@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Game Awards Archive</title>
+    <title>TGA Archive</title>
+    <link rel="icon" type="image/png" href="{% static 'awards/icons/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=2">
     <link rel="stylesheet" href="{% static 'awards/home.css' %}">
 </head>
@@ -13,13 +14,15 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">TGA ARCHIVE</div>
+        <a href="/" class="logo">
+            <img src="{% static 'awards/icons/favicon.png' %}" alt="TGA Logo" class="nav-icon">
+            <span class="logo-text">TGA ARCHIVE</span>
+        </a>
         <div class="nav-links">
             <form action="{% url 'awards:search' %}" method="get" class="search-form">
                 <input type="text" name="q" placeholder="Search games..." class="search-input" required>
                 <button type="submit" class="search-btn">🔍</button>
             </form>
-            <a href="/">Home Page</a>
             <a href="{% url 'awards:top_games' %}">Top Games</a>
             <a href="{% url 'awards:hall_of_fame' %}" class="nav-highlight">Hall of Fame</a>
         </div>
@@ -36,7 +39,7 @@
             {% if goty_trailer_id %}
             <div class="hero-video-wrapper">
                 <iframe
-                    src="https://www.youtube.com/embed/{{ goty_trailer_id }}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist={{ goty_trailer_id }}&modestbranding=1"
+                    src="https://www.youtube.com/embed/{{ goty_trailer_id }}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist={{ goty_trailer_id }}&modestbranding=1&start=7"
                     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="hero-video"
                     referrerpolicy="strict-origin-when-cross-origin">
                 </iframe>
