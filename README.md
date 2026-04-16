@@ -1,11 +1,10 @@
 # 🏆 The Game Awards Archive
 
 The Game Awards Archive is a Django-based web application that serves as a historic database for all the games nominated and awarded at The Game Awards between 2014-2025. This application provides a comprehensive look at the best video games, featuring extensive details, trailers, and developer information.
-> **[💬 README İPUCU:]** *Aşağıdaki yerine tutucu (placeholder) görsellerin kodlarını (`![Görsel Açıklaması](...)` veya `<img .../>`) GitHub üzerinden silip kendi oluşturduğun GIF veya ekran görüntülerini sürükleyip bırakabilirsin. Görsellerini yükledikten sonra bu ipucunu da kendi dosyandan silebilirsin.*
+
 
 <div align="center">
-  <!-- Ana sayfanın hareketli bir GIF'ini buraya eklemen çok şık duracaktır -->
-  <img src="https://via.placeholder.com/800x400.png?text=Drop+Your+Main+App+GIF+Here+(e.g.+Home+Page+Video+Auto-playing)" alt="Main App Animation" />
+  <img src="" alt="Main App Animation" />
 </div>
 
 <br/>
@@ -14,12 +13,11 @@ The Game Awards Archive is a Django-based web application that serves as a histo
 
 <table align="center">
   <tr>
-    <td><img src="https://via.placeholder.com/400x250.png?text=Drop+Home+Page+Screenshot+Here" alt="Home Page"/></td>
-    <td><img src="https://via.placeholder.com/400x250.png?text=Drop+Hall+of+Fame+Screenshot+Here" alt="Hall of Fame Details"/></td>
+    <td><img src="" alt="Home Page"/></td>
   </tr>
   <tr>
-    <td><img src="https://via.placeholder.com/400x250.png?text=Drop+Top+Games+Screenshot+Here" alt="Top Games View"/></td>
-    <td><img src="https://via.placeholder.com/400x250.png?text=Drop+Game+Details+Screenshot+Here" alt="Game Details View"/></td>
+    <td><img src="" alt="Top Games View"/></td>
+    <td><img src="" alt="Game Details View"/></td>
   </tr>
 </table>
 
