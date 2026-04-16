@@ -148,21 +148,41 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+    .hof-container {
+        padding: 40px 16px;
+    }
+
+    .hof-title {
+        font-size: 2.5rem;
+    }
+
     .timeline::before {
         left: 20px;
     }
     
     .timeline-item {
         align-items: flex-start;
-        padding-left: 60px;
+        padding-left: 50px;
     }
     
     .timeline-year {
         position: absolute;
         left: 0;
         top: 0;
-        padding: 8px 16px;
-        font-size: 1.2rem;
+        padding: 8px 12px;
+        font-size: 1.1rem;
         border-width: 2px;
+    }
+    
+    .timeline-card {
+        width: 100%;
+    }
+    
+    .hof-img {
+        height: 180px;
+    }
+
+    .hof-game-title {
+        font-size: 1.5rem;
     }
 }

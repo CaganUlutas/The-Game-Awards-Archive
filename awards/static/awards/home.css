@@ -315,3 +315,68 @@
     font-weight: bold;
     font-size: 0.75rem;
 }
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+        padding: 0 16px 32px 16px;
+    }
+
+    .hero-video-wrapper {
+        min-width: 100vw;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+    }
+
+    .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 16px;
+    }
+
+    .btn-primary {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+
+    .year-selector-container {
+        padding: 16px;
+        top: 110px; /* Adjust sticky point because mobile navbar is taller now */
+    }
+
+    .year-btn {
+        padding: 6px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .year-title {
+        font-size: 1.75rem;
+        margin-bottom: 24px;
+    }
+
+    .content-wrapper {
+        padding: 0 16px;
+        margin-top: 24px;
+    }
+
+    .games-grid {
+        gap: 16px;
+    }
+
+    .game-card {
+        width: 100%;
+        max-width: 380px; /* Single column on mobile */
+        margin: 0 auto;
+    }
+    
+    .card-img {
+        height: 180px;
+    }
+}
