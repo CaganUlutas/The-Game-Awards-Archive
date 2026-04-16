@@ -11,7 +11,14 @@
 body {
     background-color: #0b0f19;
     color: white;
-    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+    width: 100%;
 }
 
 a {
@@ -102,11 +109,10 @@ a {
    FOOTER
    ========================================= */
 footer {
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid #374151;
+    background-color: transparent;
+    border-top: 1px solid #1f2937;
     padding: 32px;
-    margin-top: 60px;
+    margin-top: auto;
     text-align: center;
 }
 
