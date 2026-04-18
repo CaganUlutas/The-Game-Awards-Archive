@@ -104,7 +104,7 @@
                                 <h3 class="card-title">{{ nomination.game.name }}</h3>
                                 <div class="card-footer">
                                     <span class="card-genre">
-                                        {{ nomination.game.genres|default:"Oyun"|slice:":15" }}
+                                        {{ nomination.game.developers|default:"Unknown" }}
                                     </span>
                                     <span class="card-score">
                                         {% if nomination.game.metacritic_score %}
@@ -147,7 +147,7 @@
                                 <h3 class="card-title">{{ nomination.game.name }}</h3>
                                 <div class="card-footer">
                                     <span class="card-genre">
-                                        {{ nomination.game.genres|default:"Game"|slice:":15" }}
+                                        {{ nomination.game.developers|default:"Unknown" }}
                                     </span>
                                     <span class="card-score">
                                         {% if nomination.game.metacritic_score %}
