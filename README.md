@@ -33,8 +33,8 @@ The Game Awards Archive is a Django-based web application that serves as a histo
 ## 🛠️ Tech Stack
 
 - **Backend:** Python, Django
-- **Frontend:** HTML, CSS (Custom styling with modern aesthetics), Vanilla JavaScript
-- **Database:** SQLite (Development)
+- **Frontend:** HTML, CSS (Custom styling with modern aesthetics)
+- **Database:** SQLite (Development), PostgreSQL (Deployment)
 - **External APIs:** RAWG Video Games Database API
 
 ## 🚀 Installation & Setup
