@@ -51,7 +51,7 @@
             <div class="hero-content">
                 <span class="badge-goty">🏆 GAME OF THE YEAR {{ current_year.year }}</span>
                 <h1 class="hero-title">{{ nom.game.name }}</h1>
-                <p class="hero-desc">{{ nom.game.genres }}</p>
+                <p class="hero-desc">{{ nom.game.developers }}</p>
 
                 <div class="hero-actions">
                     <a href="{% url 'awards:game_detail' slug=nom.game.slug %}" class="btn-primary">See Details</a>
