@@ -1,8 +1,9 @@
+import os
 from django.core.management.base import BaseCommand
 import requests
 import time
  
-API_KEY = "163a906d602046b08f47ad264261846d"
+API_KEY = os.environ.get("RAWG_API_KEY", "")
  
 STORE_MAP = {
     1: "steam",

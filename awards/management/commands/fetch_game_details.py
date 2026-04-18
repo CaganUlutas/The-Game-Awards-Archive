@@ -1,8 +1,9 @@
+import os
 import time
 import requests
 from django.core.management.base import BaseCommand
  
-API_KEY = "163a906d602046b08f47ad264261846d"
+API_KEY = os.environ.get("RAWG_API_KEY", "")
  
  
 class Command(BaseCommand):
