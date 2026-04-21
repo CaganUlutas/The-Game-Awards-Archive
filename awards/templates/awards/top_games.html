@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <h3 class="card-title">{{ game.name }}</h3>
                                 <div class="card-footer">
-                                    <span class="card-genre">{{ game.genres|default:"Game"|slice:":15" }}</span>
+                                    <span class="card-developer">{{ game.developers|default:"Unknown" }}</span>
                                     <span class="card-score">
                                         {% if game.metacritic_score %}
                                             {{ game.metacritic_score }}
