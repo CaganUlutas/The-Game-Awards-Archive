@@ -29,6 +29,13 @@ class Game(models.Model):
     xbox_url = models.URLField(null=True, blank=True)
     nintendo_url = models.URLField(null=True, blank=True)
 
+    # Steam data
+    steam_review_score = models.CharField(max_length=50, null=True, blank=True)
+    steam_review_percentage = models.IntegerField(null=True, blank=True)
+    steam_total_reviews = models.IntegerField(null=True, blank=True)
+    steam_screenshots = models.JSONField(null=True, blank=True)
+    steam_owners = models.CharField(max_length=100, null=True, blank=True)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base_slug = slugify(self.name)

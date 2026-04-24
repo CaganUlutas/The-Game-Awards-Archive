@@ -417,43 +417,597 @@
 }
 
 /* =========================================
+   STEAM STATS CARD
+   ========================================= */
+.steam-stats-card {
+    background: linear-gradient(135deg, #1a202c 0%, #171d2a 50%, #1a2235 100%);
+    border: 1px solid #2a3444;
+    position: relative;
+    overflow: hidden;
+}
+
+.steam-stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #171a21, #66c0f4, #171a21);
+}
+
+.steam-stats-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.steam-stats-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* Circular Gauge */
+.steam-gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0 20px;
+}
+
+.steam-gauge {
+    position: relative;
+    width: 110px;
+    height: 110px;
+}
+
+.gauge-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #1f2937;
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dashoffset: 0;
+    transition: stroke-dasharray 1.5s ease;
+    animation: gaugeAnim 1.5s ease forwards;
+}
+
+@keyframes gaugeAnim {
+    from {
+        stroke-dasharray: 0, 100;
+    }
+}
+
+.gauge-positive { stroke: #4ade80; filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.4)); }
+.gauge-mixed-positive { stroke: #a3e635; filter: drop-shadow(0 0 6px rgba(163, 230, 53, 0.4)); }
+.gauge-mixed { stroke: #fbbf24; filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.4)); }
+.gauge-negative { stroke: #f87171; filter: drop-shadow(0 0 6px rgba(248, 113, 113, 0.4)); }
+
+.gauge-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-percentage {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #f3f4f6;
+    line-height: 1;
+}
+
+.gauge-label-area {
+    text-align: center;
+}
+
+/* Info Grid (Reviews + Owners) */
+.steam-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.steam-info-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(102, 192, 244, 0.04);
+    border: 1px solid #272d38;
+    border-radius: 10px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.steam-info-box:hover {
+    background: rgba(102, 192, 244, 0.08);
+    border-color: #3a4555;
+}
+
+.steam-info-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.steam-info-data {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.steam-info-number {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e5e7eb;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.steam-info-label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Fallback stat items */
+.steam-stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #272d38;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.steam-stat-label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.steam-stat-value {
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    font-weight: 600;
+}
+
+/* Review Score Badges */
+.steam-review-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-align: center;
+    display: inline-block;
+}
+
+.badge-positive {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.badge-mixed-positive {
+    color: #a3e635;
+    background: rgba(163, 230, 53, 0.12);
+    border: 1px solid rgba(163, 230, 53, 0.3);
+}
+
+.badge-mixed {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-negative {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+/* =========================================
+   SCREENSHOTS GALLERY
+   ========================================= */
+.screenshots-section {
+    margin-bottom: 48px;
+}
+
+.screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.screenshot-thumb {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #374151;
+    aspect-ratio: 16 / 9;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.screenshot-thumb:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: #66c0f4;
+    box-shadow: 0 8px 24px rgba(102, 192, 244, 0.2);
+}
+
+.screenshot-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.25s ease;
+}
+
+.screenshot-thumb:hover img {
+    filter: brightness(0.7);
+}
+
+.screenshot-hover-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.screenshot-thumb:hover .screenshot-hover-overlay {
+    opacity: 1;
+}
+
+.screenshot-zoom-icon {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* =========================================
+   SCREENSHOT LIGHTBOX MODAL
+   ========================================= */
+.screenshot-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.screenshot-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-controls {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 10;
+}
+
+.modal-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.6rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-prev {
+    left: 24px;
+}
+
+.modal-next {
+    right: 24px;
+}
+
+.modal-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 85vw;
+    max-height: 85vh;
+}
+
+.modal-image-wrapper img {
+    max-width: 85vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-counter {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================
    MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 768px) {
-    .detail-hero {
-        height: auto;
-        min-height: 40vh;
-        padding-top: 60px;
-    }
-    
-    .detail-title {
-        font-size: 2.2rem;
+    /* --- Navbar --- */
+    .navbar {
+        flex-wrap: wrap;
     }
 
-    .detail-container {
-        padding: 24px 16px;
-        gap: 24px;
+    /* --- Hero Section --- */
+    .detail-hero {
+        height: auto;
+        min-height: 35vh;
+        padding-top: 60px;
+    }
+
+    .detail-title {
+        font-size: 1.8rem;
+        line-height: 1.1;
     }
 
     .detail-header-content {
-        padding: 0 16px 24px 16px;
+        padding: 0 16px 20px 16px;
+    }
+
+    .detail-meta {
+        gap: 8px;
+    }
+
+    .meta-item {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+
+    .meta-score {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+
+    /* --- Main Container --- */
+    .detail-container {
+        padding: 20px 16px;
+        gap: 20px;
+    }
+
+    /* --- Sidebar Cards --- */
+    .stat-card,
+    .action-card {
+        padding: 18px;
+        margin-bottom: 16px;
     }
 
     .stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    /* --- Steam Stats Mobile --- */
+    .steam-gauge {
+        width: 90px;
+        height: 90px;
+    }
+
+    .gauge-percentage {
+        font-size: 1.3rem;
+    }
+
+    .steam-info-grid {
         grid-template-columns: 1fr;
+    }
+
+    .steam-info-box {
+        padding: 10px;
+    }
+
+    .steam-info-number {
+        font-size: 0.85rem;
+    }
+
+    /* --- HLTB Section --- */
+    .hltb-section {
+        margin-top: 16px !important;
+        padding-top: 16px !important;
+    }
+
+    .hltb-label {
+        font-size: 0.8rem;
+    }
+
+    .hltb-value {
+        font-size: 0.85rem;
+    }
+
+    /* --- Store Links --- */
+    .btn-store {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* --- Content Section --- */
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+    }
+
+    .game-description-block p {
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+    }
+
+    /* --- Video --- */
+    .video-section {
+        margin-bottom: 32px;
+    }
+
+    /* --- Screenshots Mobile --- */
+    .screenshots-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .screenshot-thumb:hover {
+        transform: none;
+    }
+
+    /* --- Nominations Mobile --- */
+    .nomination-item {
+        grid-template-columns: 60px 1fr auto;
+        gap: 8px;
+        padding: 14px 12px;
+    }
+
+    .nom-year {
+        font-size: 1.1rem;
+    }
+
+    .nom-category {
+        font-size: 0.9rem;
+    }
+
+    .badge-goty {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        margin-bottom: 0;
+    }
+
+    .badge-nominee {
+        font-size: 0.65rem;
+    }
+
+    /* --- Lightbox Modal Mobile --- */
+    .modal-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .modal-prev {
+        left: 6px;
+    }
+
+    .modal-next {
+        right: 6px;
+    }
+
+    .modal-image-wrapper img {
+        max-width: 96vw;
+        max-height: 70vh;
+    }
+
+    .modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+        padding: 24px 16px;
+    }
+
+    .footer-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+    .detail-title {
+        font-size: 1.5rem;
     }
 
     .nomination-item {
         grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 16px;
+        gap: 6px;
     }
 
     .nom-result {
         text-align: left;
     }
 
-    .section-title {
-        font-size: 1.5rem;
+    .stat-grid {
+        grid-template-columns: 1fr;
     }
 }

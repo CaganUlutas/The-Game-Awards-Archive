@@ -8,7 +8,10 @@
     <title>{{ game.name }} - TGA Archive</title>
     <link rel="icon" type="image/png" href="{% static 'awards/icons/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'awards/base.css' %}?v=3">
-    <link rel="stylesheet" href="{% static 'awards/details.css' %}?v=3">
+    <link rel="stylesheet" href="{% static 'awards/details.css' %}?v=5">
+    {% if steam_screenshots %}
+    <script src="{% static 'awards/lightbox.js' %}?v=1" defer></script>
+    {% endif %}
 </head>
 
 <body>
@@ -81,6 +84,72 @@
     </div>
 </div>
 
+            {% if game.steam_review_score or game.steam_owners %}
+            <div class="stat-card steam-stats-card">
+                <h3><img src="{% static 'awards/icons/steam.png' %}" alt="Steam" class="steam-stats-icon"> Steam Stats</h3>
+                
+                {% if game.steam_review_percentage %}
+                <div class="steam-gauge-container">
+                    <div class="steam-gauge">
+                        <svg viewBox="0 0 120 120" class="gauge-svg">
+                            <circle cx="60" cy="60" r="52" class="gauge-bg" pathLength="100"/>
+                            <circle cx="60" cy="60" r="52" class="gauge-fill
+                                {% if game.steam_review_percentage >= 85 %}gauge-positive
+                                {% elif game.steam_review_percentage >= 70 %}gauge-mixed-positive
+                                {% elif game.steam_review_percentage >= 50 %}gauge-mixed
+                                {% else %}gauge-negative{% endif %}"
+                                pathLength="100"
+                                style="stroke-dasharray: {{ game.steam_review_percentage|floatformat:'1' }}, 100;"
+                            />
+                        </svg>
+                        <div class="gauge-text">
+                            <span class="gauge-percentage">{{ game.steam_review_percentage }}%</span>
+                        </div>
+                    </div>
+                    <div class="gauge-label-area">
+                        <span class="steam-review-badge
+                            {% if 'Overwhelmingly Positive' in game.steam_review_score or 'Very Positive' in game.steam_review_score %}badge-positive
+                            {% elif 'Mostly Positive' in game.steam_review_score or 'Positive' in game.steam_review_score %}badge-mixed-positive
+                            {% elif 'Mixed' in game.steam_review_score %}badge-mixed
+                            {% else %}badge-negative{% endif %}
+                        ">{{ game.steam_review_score }}</span>
+                    </div>
+                </div>
+                {% elif game.steam_review_score %}
+                <div class="steam-stat-item">
+                    <span class="steam-stat-label">User Reviews</span>
+                    <span class="steam-review-badge
+                        {% if 'Overwhelmingly Positive' in game.steam_review_score or 'Very Positive' in game.steam_review_score %}badge-positive
+                        {% elif 'Mostly Positive' in game.steam_review_score or 'Positive' in game.steam_review_score %}badge-mixed-positive
+                        {% elif 'Mixed' in game.steam_review_score %}badge-mixed
+                        {% else %}badge-negative{% endif %}
+                    ">{{ game.steam_review_score }}</span>
+                </div>
+                {% endif %}
+
+                <div class="steam-info-grid">
+                    {% if game.steam_total_reviews %}
+                    <div class="steam-info-box">
+                        <div class="steam-info-icon">💬</div>
+                        <div class="steam-info-data">
+                            <span class="steam-info-number">{{ game.steam_total_reviews|floatformat:"0" }}</span>
+                            <span class="steam-info-label">Total Reviews</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if game.steam_owners %}
+                    <div class="steam-info-box">
+                        <div class="steam-info-icon">👥</div>
+                        <div class="steam-info-data">
+                            <span class="steam-info-number">{{ game.steam_owners }}</span>
+                            <span class="steam-info-label">Est. Owners</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
             <div class="action-card">
                 <h3 style="margin-bottom: 16px; color: #e5e7eb; font-size: 1.1rem; border-bottom: 1px solid #374151; padding-bottom: 8px;">Store Links</h3>
                 <div class="store-links">
@@ -149,6 +218,22 @@
             </div>
             {% endif %}
 
+            {% if steam_screenshots %}
+            <div class="screenshots-section">
+                <h2 class="section-title">📸 Screenshots</h2>
+                <div class="screenshots-grid">
+                    {% for ss in steam_screenshots %}
+                    <div class="screenshot-thumb" data-full="{{ ss.full }}" onclick="openLightbox({{ forloop.counter0 }})">
+                        <img src="{{ ss.thumb }}" alt="{{ game.name }} Screenshot {{ forloop.counter }}" loading="lazy">
+                        <div class="screenshot-hover-overlay">
+                            <span class="screenshot-zoom-icon">🔍</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
             <h2 class="section-title">Nominations and Award History</h2>
             
             <div class="nomination-list">
@@ -180,5 +265,21 @@
             </p>
         </div>
     </footer>
+
+    {% if steam_screenshots %}
+    <!-- Screenshot Lightbox Modal -->
+    <div class="screenshot-modal" id="screenshotModal" onclick="closeLightboxOutside(event)">
+        <div class="modal-controls">
+            <button class="modal-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+        </div>
+        <button class="modal-nav modal-prev" onclick="navigateLightbox(-1)" aria-label="Previous">❮</button>
+        <div class="modal-image-wrapper">
+            <img id="modalImage" src="" alt="Screenshot">
+            <div class="modal-counter" id="modalCounter"></div>
+        </div>
+        <button class="modal-nav modal-next" onclick="navigateLightbox(1)" aria-label="Next">❯</button>
+    </div>
+    {% endif %}
+
 </body>
 </html>
