@@ -518,7 +518,7 @@
 /* Info Grid (Reviews + Owners) */
 .steam-info-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
     margin-top: 8px;
 }
@@ -552,13 +552,11 @@
 }
 
 .steam-info-number {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #e5e7eb;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    line-height: 1.3;
+    word-break: break-word;
 }
 
 .steam-info-label {

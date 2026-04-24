@@ -79,6 +79,13 @@ def game_detail(request, slug):
             trailer_id = game.trailer_url.split('embed/')[-1]
         elif 'watch?v=' in game.trailer_url:
             trailer_id = game.trailer_url.split('watch?v=')[-1]
+
+    # Steam screenshots
+    steam_screenshots = game.steam_screenshots if game.steam_screenshots else None
+
+    # Format owners separator
+    if game.steam_owners:
+        game.steam_owners = game.steam_owners.replace(' .. ', ' - ')
  
     return render(request, 'awards/game_details.html', {
         'game': game,
@@ -91,6 +98,7 @@ def game_detail(request, slug):
         'hltb_main_hours': parse_hltb_hours(game.hltb_main),
         'hltb_extra_hours': parse_hltb_hours(game.hltb_extra),
         'hltb_completionist_hours': parse_hltb_hours(game.hltb_completionist),
+        'steam_screenshots': steam_screenshots,
     })
 
 def hall_of_fame(request):
