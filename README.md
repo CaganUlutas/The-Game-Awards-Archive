@@ -1,8 +1,9 @@
 # 🏆 The Game Awards Archive
 
-Link: https://thegameawardsarchive.onrender.com
+**Live Demo:** [thegameawardsarchive.onrender.com](https://thegameawardsarchive.onrender.com)
 
-The Game Awards Archive is a Django-based web application that serves as a historic database for all the games nominated and awarded at The Game Awards between 2014-2025. This application provides a comprehensive look at the best video games, featuring extensive details, trailers, and developer information.
+A comprehensive, Django-powered web archive cataloguing every game nominated and awarded at **The Game Awards** from 2014 to 2025. Featuring 226+ games with rich metadata pulled from multiple APIs, the site delivers an immersive, premium browsing experience across all devices.
+
 <div align="center">
   <img src="assets/Home%20Animation.gif" alt="The Game Awards Archive - Main Animation" />
 </div>
@@ -23,72 +24,167 @@ The Game Awards Archive is a Django-based web application that serves as a histo
 
 ## ✨ Features
 
-- **Hall of Fame:** Browse through the winners of the prestigious "Game of the Year" award.
-- **Top Games:** Explore the highest-rated games based on their Metacritic scores, complete with pagination.
-- **Yearly & Category Filtering:** Discover games by filtering through specific years and award categories on the home page.
-- **Rich Game Details:** Integrated with the [RAWG API](https://rawg.io/apidocs) to fetch and display in-depth game information including developers, genres, and release dates.
-- **Video Trailers:** Automatically fetches and plays YouTube trailers for Game of the Year winners smoothly with a responsive video background.
-- **Responsive Design:** A polished, modern, and visually appealing UI optimized for all devices, featuring custom animations, aesthetic typography, and a premium look.
+### 🏠 Home Page
+- **Dynamic Hero Section** with an auto-playing YouTube trailer background for each year's Game of the Year winner.
+- **Year Selector** to browse nominations and winners across all ceremony years (2014–2025).
+- **Category-Grouped Cards** showing every nominated game with Metacritic scores, developer names, and winner badges.
+
+### 🎮 Game Details Page
+- **Rich Metadata:** Description, release date, genres, developers, Metacritic score, and platform availability.
+- **Embedded YouTube Trailers** with auto-play support.
+- **Steam Integration:**
+  - Review score with a circular SVG gauge and color-coded badges (Overwhelmingly Positive → Negative).
+  - Total review count and estimated ownership figures (via SteamSpy).
+  - Screenshot gallery with a full-screen lightbox modal and keyboard/click navigation.
+- **HowLongToBeat Data:** Main Story, Main + Extras, and Completionist playtime estimates.
+- **Store Links:** Direct buttons to Steam, PlayStation Store, Xbox Store, and Nintendo eShop.
+- **Nomination & Award History:** Full timeline of every nomination and win for the game.
+
+### 🏅 Hall of Fame
+- A vertical timeline showcasing every **Game of the Year** winner from 2014 to 2025.
+
+### 📊 Top Games
+- Paginated ranking of all games sorted by Metacritic score (20 per page).
+
+### 🔍 Search
+- Full-text search across all game titles with instant results.
+
+### 📱 Responsive Design
+- Fully optimized for desktop, tablet, and mobile with custom breakpoints, smooth animations, and premium typography.
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Python, Django
-- **Frontend:** HTML, CSS (Custom styling with modern aesthetics)
-- **Database:** SQLite (Development), PostgreSQL (Deployment)
-- **External APIs:** RAWG Video Games Database API
+| Layer | Technology |
+|-------|------------|
+| **Backend** | Python, Django 6.0 |
+| **Frontend** | HTML5, CSS3 (Custom styling with modern aesthetics), Vanilla JavaScript |
+| **Database** | SQLite (Development), PostgreSQL (Production) |
+| **Deployment** | Render, Gunicorn, WhiteNoise |
+| **External APIs** | RAWG, Steam Store API, Steam Reviews API, SteamSpy, HowLongToBeat |
+
+## 📁 Project Structure
+
+```
+gameawards/
+├── manage.py
+├── requirements.txt
+├── build.sh                          # Render deployment script
+├── .env.example                      # Environment variable template
+│
+├── gameawards/                       # Django project settings
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── awards/                           # Main Django app
+│   ├── models.py                     # Game, AwardYear, Category, Nomination
+│   ├── views.py                      # Page views & logic
+│   ├── urls.py                       # URL routing
+│   ├── admin.py                      # Admin panel configuration
+│   │
+│   ├── templates/awards/
+│   │   ├── home.html                 # Home page with hero & year selector
+│   │   ├── game_details.html         # Game detail page
+│   │   ├── hall_of_fame.html         # GOTY winners timeline
+│   │   ├── top_games.html            # Metacritic-ranked game list
+│   │   └── search_results.html       # Search results page
+│   │
+│   ├── static/awards/
+│   │   ├── base.css                  # Shared styles (navbar, footer, etc.)
+│   │   ├── home.css                  # Home page styles
+│   │   ├── details.css               # Game details page styles
+│   │   ├── hall_of_fame.css          # Hall of Fame page styles
+│   │   ├── top_games.css             # Top Games page styles
+│   │   ├── lightbox.js               # Screenshot lightbox modal logic
+│   │   └── icons/                    # Favicon & store logos
+│   │
+│   ├── fixtures/
+│   │   ├── tga_data.json             # Core nomination/award data
+│   │   └── all_data.json             # Full database dump (games + metadata)
+│   │
+│   └── management/commands/          # Custom data pipeline commands
+│       ├── fetch_game_details.py     # RAWG API → game metadata
+│       ├── fetch_developers.py       # RAWG API → developer names
+│       ├── fetch_store_links.py      # RAWG API → store URLs
+│       ├── fetch_trailers.py         # YouTube scraping → trailer URLs
+│       ├── fetch_steam_data.py       # Steam + SteamSpy → reviews, screenshots, owners
+│       └── fetch_hltb.py             # HowLongToBeat → playtime estimates
+│
+└── assets/                           # README GIFs & images
+```
 
 ## 🚀 Installation & Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repository-url>
-   cd gameawards
+   git clone https://github.com/CaganUlutas/The-Game-Awards-Archive.git
+   cd The-Game-Awards-Archive
    ```
 
 2. **Create a virtual environment:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies:**
-   Since there might not be a `requirements.txt`, ensure you have the necessary packages:
    ```bash
-   pip install django requests
+   pip install -r requirements.txt
    ```
 
-4. **Environment Variables:**
-   Make sure you configure any necessary API Keys (like your RAWG API Key) if required by the custom management commands.
+4. **Set up environment variables:**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your keys:
+   #   DJANGO_SECRET_KEY=your-secret-key
+   #   RAWG_API_KEY=your-rawg-api-key
+   ```
 
-5. **Run Database Migrations:**
+5. **Run database migrations:**
    ```bash
    python manage.py migrate
    ```
 
-6. **Fetch Game Data (Custom Commands):**
-   The project includes custom logic to populate the database with extensive details from RAWG:
+6. **Load the data fixture:**
    ```bash
-   python manage.py fetch_game_details
-   python manage.py fetch_developers
+   python manage.py loaddata awards/fixtures/all_data.json
    ```
 
-7. **Run the Development Server:**
+7. **Start the development server:**
    ```bash
    python manage.py runserver
    ```
 
-8. **Experience the Archive:**
-   Navigate to `http://127.0.0.1:8000/` in your web browser.
+8. **Open in browser:**
+   Navigate to `http://127.0.0.1:8000/`
 
-## 📁 Project Structure
+## 🔧 Custom Management Commands
 
-- `manage.py`: Django entry point.
-- `gameawards/`: Core project settings, URLs, and configurations.
-- `awards/`: A Django app containing the main logic.
-  - `views.py` & `urls.py`: Request handlers and routing.
-  - `models.py`: Database schema definitions for Awards, Nominations, etc.
-  - `templates/awards/`: HTML layouts and pages (`home.html`, `game_details.html`, `top_games.html`, etc.).
-  - `management/commands/`: Custom scripts built to feed external API data into the local database (`fetch_game_details.py`, `fetch_developers.py`).
+These commands form the data pipeline that populates and enriches the database:
+
+| Command | Description |
+|---------|-------------|
+| `fetch_game_details` | Fetches core game metadata (description, genres, platforms, scores) from the RAWG API. |
+| `fetch_developers` | Fetches and updates developer names from the RAWG API. |
+| `fetch_store_links` | Fetches Steam, PlayStation, Xbox, and Nintendo store URLs from the RAWG API. |
+| `fetch_trailers` | Scrapes YouTube search results to find and save official game trailer embed URLs. |
+| `fetch_steam_data` | Fetches Steam review scores, screenshots, and estimated ownership data from Steam & SteamSpy APIs. Supports `--all` and `--limit` flags. |
+| `fetch_hltb` | Fetches HowLongToBeat playtime estimates (Main Story, Main + Extras, Completionist). |
+
+**Usage example:**
+```bash
+python manage.py fetch_game_details
+python manage.py fetch_steam_data --all --limit 10
+```
+
+## 🌐 Deployment
+
+The project is deployed on **Render** with the following configuration:
+
+- **Build Command:** `./build.sh` (installs deps, collects static files, runs migrations, loads fixture data)
+- **Start Command:** `gunicorn gameawards.wsgi`
+- **Static Files:** Served via WhiteNoise middleware
+- **Database:** PostgreSQL (automatically configured via `DATABASE_URL`)
 
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
